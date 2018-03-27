@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="AtividadeIntegracao1:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/AtividadeIntegracao1_jar</output-path>
-    <root id="archive" name="AtividadeIntegracao1.jar">
-      <element id="module-output" name="AtividadeSupervisionada1" />
-    </root>
-  </artifact>
-</component>
