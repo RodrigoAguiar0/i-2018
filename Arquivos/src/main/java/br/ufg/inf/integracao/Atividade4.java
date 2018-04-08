@@ -3,7 +3,6 @@ package br.ufg.inf.integracao;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ public class Atividade4 {
         Path path = Paths.get(args[0]);
         byte[] bytes;
 
-        System.out.println("Digite os caracteres que deseja incluir no arquivo");
+        System.out.println("Digite o nome do arquivo que deseja criar");
         String caracteres = scanner.nextLine();
 
         bytes = caracteres.getBytes();
