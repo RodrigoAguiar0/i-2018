@@ -1,0 +1,5 @@
+1. Os tipos literais admitidos são: true, false, null, char pertencente ao unicode, /, ", digitos de 1-9, quatro digitos hexadecimais, .digito para frações, edigito para exponencial.
+
+2. O MIME type correto para textos JSON é aplicacao/json. O enconding padrão é UTF-8 (Origem: RFC 4627).
+
+3. Sim, o null está recebendo nil, o que está incorreto, já que o tipo literal é null.

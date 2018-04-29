@@ -1,0 +1,7 @@
+{
+    "bicycle":{
+        "gear": 32,
+        "cadence":10,
+        "speed": 20
+    }
+}
