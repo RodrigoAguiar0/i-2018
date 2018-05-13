@@ -10,12 +10,13 @@ public class Atividade2 {
     public static void main(String[] args) {
         String bytesString;
         Path path = Paths.get(args[0]);
-        byte[] bytes = new byte[0];
+        byte[] bytes;
         StringBuilder bytesHexa = new StringBuilder();
         try {
             bytes = Files.readAllBytes(path);
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
 
         for (int i = 0; i < bytes.length; i++) {
