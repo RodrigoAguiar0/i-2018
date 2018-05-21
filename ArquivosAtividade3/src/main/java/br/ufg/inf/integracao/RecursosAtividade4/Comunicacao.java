@@ -6,6 +6,18 @@ public class Comunicacao {
     private String detalhe;
     private String uso;
 
+    public Comunicacao(String meio, String preferencia, String detalhe, String uso) {
+        super();
+        this.meio = meio;
+        this.preferencia = preferencia;
+        this.detalhe = detalhe;
+        this.uso = uso;
+    }
+
+    public Comunicacao() {
+        super();
+    }
+
     public String getMeio() {
         return meio;
     }
@@ -36,14 +48,5 @@ public class Comunicacao {
 
     public void setUso(String uso) {
         this.uso = uso;
-    }
-
-    public Comunicacao(String meio, String preferencia, String detalhe, String uso) {
-        this.meio = meio;
-        this.preferencia = preferencia;
-        this.detalhe = detalhe;
-        this.uso = uso;
-
-
     }
 }

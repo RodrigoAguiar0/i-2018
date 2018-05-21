@@ -13,6 +13,7 @@ public class Nome {
 
     public Nome(int surrogateKey, String titulos, String nomes, String sobrenomes, String sufixos, String prefixos,
                 String usoCondicional) {
+        super();
         this.surrogateKey = surrogateKey;
         this.titulos = titulos;
         this.nomes = nomes;
@@ -20,6 +21,10 @@ public class Nome {
         this.sufixos = sufixos;
         this.prefixos = prefixos;
         this.usoCondicional = usoCondicional;
+    }
+
+    public Nome() {
+        super();
     }
 
     public int getSurrogateKey() {

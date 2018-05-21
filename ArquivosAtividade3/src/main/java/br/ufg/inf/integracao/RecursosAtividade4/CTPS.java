@@ -5,8 +5,13 @@ public class CTPS {
     private String estado;
 
     public CTPS(String serie, String estado) {
+        super();
         this.serie = serie;
         this.estado = estado;
+    }
+
+    public CTPS() {
+        super();
     }
 
     public String getSerie() {

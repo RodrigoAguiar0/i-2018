@@ -14,12 +14,17 @@ public class Identificador {
     private TituloEleitoral tituloEleitoral;
 
     public Identificador(int surrogateKey, String designacao, String area, String emissor, Calendar data, String tipo) {
+        super();
         this.surrogateKey = surrogateKey;
         this.designacao = designacao;
         this.area = area;
         this.emissor = emissor;
         this.data = data;
         this.tipo = tipo;
+    }
+
+    public Identificador() {
+        super();
     }
 
     public int getSurrogateKey() {

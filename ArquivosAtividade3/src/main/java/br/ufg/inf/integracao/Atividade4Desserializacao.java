@@ -35,6 +35,7 @@ public class Atividade4Desserializacao {
 
         Individuo individuo = objectMapper.readValue(stringBuilder.toString().getBytes(), Individuo.class);
 
+        System.out.println("Indivíduo desserializado");
         System.out.println(individuo.toString());
     }
 }

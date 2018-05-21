@@ -9,10 +9,15 @@ public class Utilizacao {
     private Identificador identificador;
 
     public Utilizacao(String uso, Calendar dataInicial, Calendar dataFinal, Identificador identificador) {
+        super();
         this.uso = uso;
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.identificador = identificador;
+    }
+
+    public Utilizacao() {
+        super();
     }
 
     public String getUso() {

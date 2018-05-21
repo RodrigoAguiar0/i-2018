@@ -7,8 +7,13 @@ public class Data {
     private String acuracia;
 
     public Data(Calendar data, String acuracia) {
+        super();
         this.data = data;
         this.acuracia = acuracia;
+    }
+
+    public Data() {
+        super();
     }
 
     public Calendar getData() {

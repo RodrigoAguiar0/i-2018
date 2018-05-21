@@ -16,20 +16,23 @@ public class DadoDemografico {
     private Nacionalidade nacionalidade;
 
     public DadoDemografico(String sexo, String nomePai, String nomeMae, String situacaoFamiliar, String raca,
-                           String comentario, String fonteNotificObito, String nascimentoPluralidade,
-                           String nascimentoOrdem, String nascimentoSeguimento, Data dataObito, Data dataNascimento) {
+                           String comentario, String nascimentoPluralidade, String nascimentoOrdem,
+                           String nascimentoSeguimento, Data dataNascimento, Nacionalidade nacionalidade) {
         this.sexo = sexo;
         this.nomePai = nomePai;
         this.nomeMae = nomeMae;
         this.situacaoFamiliar = situacaoFamiliar;
         this.raca = raca;
         this.comentario = comentario;
-        this.fonteNotificObito = fonteNotificObito;
         this.nascimentoPluralidade = nascimentoPluralidade;
         this.nascimentoOrdem = nascimentoOrdem;
         this.nascimentoSeguimento = nascimentoSeguimento;
-        this.dataObito = dataObito;
         this.dataNascimento = dataNascimento;
+        this.nacionalidade = nacionalidade;
+    }
+
+    public DadoDemografico() {
+        super();
     }
 
     public String getSexo() {

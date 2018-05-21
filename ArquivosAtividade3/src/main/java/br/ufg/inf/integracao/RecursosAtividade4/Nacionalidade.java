@@ -9,10 +9,15 @@ public class Nacionalidade {
     private Calendar dataEntradaPais;
 
     public Nacionalidade(String municipio, String estado, String pais, Calendar dataEntradaPais) {
+        super();
         this.municipio = municipio;
         this.estado = estado;
         this.pais = pais;
         this.dataEntradaPais = dataEntradaPais;
+    }
+
+    public Nacionalidade() {
+        super();
     }
 
     public String getMunicipio() {

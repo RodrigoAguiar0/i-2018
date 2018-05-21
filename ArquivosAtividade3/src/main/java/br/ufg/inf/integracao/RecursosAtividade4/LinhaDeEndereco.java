@@ -5,8 +5,13 @@ public class LinhaDeEndereco {
     private int linha;
 
     public LinhaDeEndereco(String ordem, int linha) {
+        super();
         this.ordem = ordem;
         this.linha = linha;
+    }
+
+    public LinhaDeEndereco() {
+        super();
     }
 
     public String getOrdem() {

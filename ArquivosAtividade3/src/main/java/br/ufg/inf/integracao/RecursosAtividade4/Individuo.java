@@ -9,15 +9,14 @@ public class Individuo {
     private Vinculo[] vinculos;
     private Identificador[] identificadores;
 
-    public Individuo(int surrogateKey, Comunicacao[] comunicacoes, Nome[] nomes, DadoDemografico dadoDemografico,
-                     Endereco[] enderecos, Vinculo[] vinculos, Identificador[] identificadores) {
+    public Individuo(int surrogateKey, Nome[] nomes, Identificador[] identificadores) {
         this.surrogateKey = surrogateKey;
-        this.comunicacoes = comunicacoes;
         this.nomes = nomes;
-        this.dadoDemografico = dadoDemografico;
-        this.enderecos = enderecos;
-        this.vinculos = vinculos;
         this.identificadores = identificadores;
+    }
+
+    public Individuo() {
+        super();
     }
 
     public int getSurrogateKey() {

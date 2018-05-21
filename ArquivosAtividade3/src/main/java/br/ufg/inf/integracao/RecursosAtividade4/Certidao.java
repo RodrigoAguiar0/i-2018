@@ -8,11 +8,16 @@ public class Certidao {
     private String termo;
 
     public Certidao(String tipo, String cartorio, String livro, String folha, String termo) {
+        super();
         this.tipo = tipo;
         this.cartorio = cartorio;
         this.livro = livro;
         this.folha = folha;
         this.termo = termo;
+    }
+
+    public Certidao() {
+        super();
     }
 
     public String getTipo() {

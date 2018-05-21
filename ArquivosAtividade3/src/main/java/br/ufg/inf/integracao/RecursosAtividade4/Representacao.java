@@ -5,8 +5,13 @@ public class Representacao {
     private String alternativa;
 
     public Representacao(String utilizacao, String alternativa) {
+        super();
         this.utilizacao = utilizacao;
         this.alternativa = alternativa;
+    }
+
+    public Representacao() {
+        super();
     }
 
     public String getUtilizacao() {

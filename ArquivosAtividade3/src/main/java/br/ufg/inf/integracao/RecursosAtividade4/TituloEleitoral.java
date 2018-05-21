@@ -5,8 +5,13 @@ public class TituloEleitoral {
     private String zona;
 
     public TituloEleitoral(String secao, String zona) {
+        super();
         this.secao = secao;
         this.zona = zona;
+    }
+
+    public TituloEleitoral() {
+        super();
     }
 
     public String getSecao() {

@@ -16,6 +16,7 @@ public class Endereco {
 
     public Endereco(int surrogateKey, String bairro, String distrito, int codMunicipio, String estado, String CEP,
                     String caixaPostal, String pais, String tipo) {
+        super();
         this.surrogateKey = surrogateKey;
         this.bairro = bairro;
         this.distrito = distrito;
@@ -25,6 +26,10 @@ public class Endereco {
         this.caixaPostal = caixaPostal;
         this.pais = pais;
         this.tipo = tipo;
+    }
+
+    public Endereco() {
+        super();
     }
 
     public int getSurrogateKey() {

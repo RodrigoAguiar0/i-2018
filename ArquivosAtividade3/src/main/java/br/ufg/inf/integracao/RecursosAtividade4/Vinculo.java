@@ -9,10 +9,15 @@ public class Vinculo {
     private Identificador identificador;
 
     public Vinculo(String relacionamento, Calendar dataInicio, Calendar dataFim, Identificador identificador) {
+        super();
         this.relacionamento = relacionamento;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.identificador = identificador;
+    }
+
+    public Vinculo() {
+        super();
     }
 
     public String getRelacionamento() {
