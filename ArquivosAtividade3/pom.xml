@@ -18,6 +18,49 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+
+                <!-- Execuções do comando mvn install -->
+                <executions>
+                    <execution>
+                        <id>Atv3XML</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>src/main/java/br/ufg/inf/integracao/Atividade3Xml.java</file>
+                            <groupId>IntegracaoAplicacoes</groupId>
+                            <artifactId>Atividade3ParaXML</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <localRepositoryPath>target</localRepositoryPath>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>Atv3Obj</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>src/main/java/br/ufg/inf/integracao/Atividade3Obj.java</file>
+                            <groupId>IntegracaoAplicacoes</groupId>
+                            <artifactId>Atividade3ParaObj</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <localRepositoryPath>target</localRepositoryPath>
+                            <!-- ... other properties -->
+                        </configuration>
+                    </execution>
+                    <!-- ... other executions -->
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>

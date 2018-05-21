@@ -10,8 +10,19 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Calendar;
 
+/**
+ * Classe com o intuito de realizar a atividade número 4 do tópico 3 da matéria Integração de Aplicações, com a função
+ * de serializar um objeto Java para xml.
+ * @author Rodrigo Aguiar
+ * @version 1.0
+ */
 public class Atividade4Serializacao {
 
+    /**
+     * Responsável pela criação do objeto de exemplo para comprovar a corre serialização.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Calendar calendar = Calendar.getInstance();
         calendar.set(1997,07,11);
@@ -32,16 +43,21 @@ public class Atividade4Serializacao {
         Nome[] nomes = new Nome[]{
                 nome
         };
-
         Identificador[] identificadores = new Identificador[]{
                 identificador
         };
         Individuo individuo = new Individuo(001, nomes, identificadores);
 
+        //Chamada da função de serializar
         serializaPaciente(individuo);
         System.out.println("Paciente serializado");
     }
 
+    /**
+     * Responsável pela serialização do objeto Java em um arquivo xml
+     * @param individuo Objeto a ser serializado
+     * @throws IOException Gerada caso não seja possível serializar o objeto
+     */
     public static void serializaPaciente(Individuo individuo) throws IOException {
 
         XmlMapper objMapper = new XmlMapper();
