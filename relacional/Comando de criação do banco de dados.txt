@@ -1,0 +1,357 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`individuo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`individuo` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`individuo` (
+  `surrogate_key` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`surrogate_key`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`identificador`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`identificador` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`identificador` (
+  `surrogate_key` INT NOT NULL AUTO_INCREMENT,
+  `designacao` VARCHAR(45) NULL,
+  `area` VARCHAR(45) NULL,
+  `emissor` VARCHAR(45) NULL,
+  `data` VARCHAR(45) NULL,
+  `tipo` VARCHAR(45) NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`surrogate_key`, `individuo_surrogate_key`),
+  INDEX `fk_identificador_individuo1_idx` (`individuo_surrogate_key` ASC),
+  CONSTRAINT `fk_identificador_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ctps`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`ctps` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`ctps` (
+  `serie` INT NULL,
+  `estado` VARCHAR(45) NULL,
+  `identificador_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`identificador_surrogate_key`),
+  CONSTRAINT `fk_ctps_identificador1`
+    FOREIGN KEY (`identificador_surrogate_key`)
+    REFERENCES `mydb`.`identificador` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`certidao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`certidao` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`certidao` (
+  `tipo` INT NULL,
+  `cartorio` VARCHAR(45) NULL,
+  `livro` VARCHAR(45) NULL,
+  `folha` VARCHAR(45) NULL,
+  `termo` VARCHAR(45) NULL,
+  `identificador_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`identificador_surrogate_key`),
+  CONSTRAINT `fk_certidao_identificador1`
+    FOREIGN KEY (`identificador_surrogate_key`)
+    REFERENCES `mydb`.`identificador` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`titulo_eleitoral`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`titulo_eleitoral` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`titulo_eleitoral` (
+  `secao` INT NULL,
+  `zona` INT NULL,
+  `identificador_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`identificador_surrogate_key`),
+  CONSTRAINT `fk_titulo_eleitoral_identificador1`
+    FOREIGN KEY (`identificador_surrogate_key`)
+    REFERENCES `mydb`.`identificador` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`vinculo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`vinculo` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`vinculo` (
+  `relacionamento` INT NULL,
+  `data_inicio` VARCHAR(45) NULL,
+  `data_fim` VARCHAR(45) NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  `identificador_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`individuo_surrogate_key`, `identificador_surrogate_key`),
+  INDEX `fk_vinculo_identificador1_idx` (`identificador_surrogate_key` ASC),
+  CONSTRAINT `fk_vinculo_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vinculo_identificador1`
+    FOREIGN KEY (`identificador_surrogate_key`)
+    REFERENCES `mydb`.`identificador` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`data`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`data` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`data` (
+  `data` VARCHAR(45) NULL,
+  `acuracia` VARCHAR(45) NULL,
+  `surrogate_key` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`surrogate_key`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`endereco`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`endereco` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`endereco` (
+  `surrogate_key` INT NOT NULL AUTO_INCREMENT,
+  `bairro` VARCHAR(45) NULL,
+  `distrito` VARCHAR(45) NULL,
+  `codigoMunicipio` VARCHAR(45) NULL,
+  `estado` VARCHAR(45) NULL,
+  `cep` INT NULL,
+  `caixaPosta` VARCHAR(45) NULL,
+  `pais` VARCHAR(45) NULL,
+  `tipo` VARCHAR(45) NULL,
+  `data_inicio_surrogate_key` INT NOT NULL,
+  `data_fim_surrogate_key` INT NOT NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`surrogate_key`, `data_inicio_surrogate_key`, `individuo_surrogate_key`, `data_fim_surrogate_key`),
+  INDEX `fk_endereco_data1_idx` (`data_inicio_surrogate_key` ASC),
+  INDEX `fk_endereco_data2_idx` (`data_fim_surrogate_key` ASC),
+  INDEX `fk_endereco_individuo1_idx` (`individuo_surrogate_key` ASC),
+  CONSTRAINT `fk_endereco_data1`
+    FOREIGN KEY (`data_inicio_surrogate_key`)
+    REFERENCES `mydb`.`data` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_endereco_data2`
+    FOREIGN KEY (`data_fim_surrogate_key`)
+    REFERENCES `mydb`.`data` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_endereco_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`linha_de_endereco`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`linha_de_endereco` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`linha_de_endereco` (
+  `ordem` INT NULL,
+  `linha` VARCHAR(45) NULL,
+  `endereco_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`endereco_surrogate_key`),
+  CONSTRAINT `fk_linha_de_endereco_endereco1`
+    FOREIGN KEY (`endereco_surrogate_key`)
+    REFERENCES `mydb`.`endereco` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`nome`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`nome` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`nome` (
+  `surrogate_key` INT NOT NULL AUTO_INCREMENT,
+  `titulos` VARCHAR(45) NULL,
+  `nomes` VARCHAR(45) NULL,
+  `sobrenomes` VARCHAR(45) NULL,
+  `sufixos` VARCHAR(45) NULL,
+  `preferido` VARCHAR(45) NULL,
+  `uso_condicional` VARCHAR(45) NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`surrogate_key`, `individuo_surrogate_key`),
+  INDEX `fk_nome_individuo1_idx` (`individuo_surrogate_key` ASC),
+  CONSTRAINT `fk_nome_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`utilizacao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`utilizacao` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`utilizacao` (
+  `uso` INT NULL,
+  `data_inicial` VARCHAR(45) NULL,
+  `data_final` VARCHAR(45) NULL,
+  `identificador_surrogate_key` INT NOT NULL,
+  `nome_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`identificador_surrogate_key`, `nome_surrogate_key`),
+  INDEX `fk_utilizacao_nome1_idx` (`nome_surrogate_key` ASC),
+  CONSTRAINT `fk_utilizacao_identificador1`
+    FOREIGN KEY (`identificador_surrogate_key`)
+    REFERENCES `mydb`.`identificador` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_utilizacao_nome1`
+    FOREIGN KEY (`nome_surrogate_key`)
+    REFERENCES `mydb`.`nome` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`representacao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`representacao` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`representacao` (
+  `utilizacao` INT NOT NULL,
+  `alternativa` VARCHAR(45) NULL,
+  `nome_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`utilizacao`, `nome_surrogate_key`),
+  INDEX `fk_representacao_nome1_idx` (`nome_surrogate_key` ASC),
+  CONSTRAINT `fk_representacao_nome1`
+    FOREIGN KEY (`nome_surrogate_key`)
+    REFERENCES `mydb`.`nome` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`comunicacao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`comunicacao` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`comunicacao` (
+  `meio` INT NOT NULL,
+  `preferencia` VARCHAR(45) NULL,
+  `detalhe` VARCHAR(45) NULL,
+  `uso` VARCHAR(45) NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`meio`, `individuo_surrogate_key`),
+  INDEX `fk_comunicacao_individuo1_idx` (`individuo_surrogate_key` ASC),
+  CONSTRAINT `fk_comunicacao_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`dado_demografico`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`dado_demografico` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`dado_demografico` (
+  `sexo` INT NULL,
+  `nome_da_mae` VARCHAR(45) NULL,
+  `nome_do_pai` VARCHAR(45) NULL,
+  `situacao_familiar` VARCHAR(45) NULL,
+  `raca_cor` VARCHAR(45) NULL,
+  `comentario` VARCHAR(45) NULL,
+  `fonte_notificacao_obito` VARCHAR(45) NULL,
+  `nascimento_pluralidade` VARCHAR(45) NULL,
+  `nascimento_ordem` VARCHAR(45) NULL,
+  `nascimento_seguimento` VARCHAR(45) NULL,
+  `individuo_surrogate_key` INT NOT NULL,
+  `data_nascimento_surrogate_key` INT NOT NULL,
+  `data_obito_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`individuo_surrogate_key`, `data_nascimento_surrogate_key`, `data_obito_surrogate_key`),
+  INDEX `fk_dado_demografico_data1_idx` (`data_nascimento_surrogate_key` ASC),
+  INDEX `fk_dado_demografico_data2_idx` (`data_obito_surrogate_key` ASC),
+  CONSTRAINT `fk_dado_demografico_individuo1`
+    FOREIGN KEY (`individuo_surrogate_key`)
+    REFERENCES `mydb`.`individuo` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_dado_demografico_data1`
+    FOREIGN KEY (`data_nascimento_surrogate_key`)
+    REFERENCES `mydb`.`data` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_dado_demografico_data2`
+    FOREIGN KEY (`data_obito_surrogate_key`)
+    REFERENCES `mydb`.`data` (`surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`nacionalidade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`nacionalidade` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`nacionalidade` (
+  `municipio` INT NULL,
+  `estado` VARCHAR(45) NULL,
+  `pais` VARCHAR(45) NULL,
+  `data_entrada_pais` VARCHAR(45) NULL,
+  `dado_demografico_individuo_surrogate_key` INT NOT NULL,
+  PRIMARY KEY (`dado_demografico_individuo_surrogate_key`),
+  CONSTRAINT `fk_nacionalidade_dado_demografico1`
+    FOREIGN KEY (`dado_demografico_individuo_surrogate_key`)
+    REFERENCES `mydb`.`dado_demografico` (`individuo_surrogate_key`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
