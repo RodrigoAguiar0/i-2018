@@ -1,1 +1,83 @@
+Aqui estão inseridas as consultas para atender a cada um dos casos de uso definidos para o software
 
+Obs: os nomes utilizados que serão inseridos pelo usuário serão identificados com o uso de colchetes como no exemplo [exemplo]. Cada valor depende do que o usuário deseja inserir.
+
+Caso de uso 1:
+
+insert into individuo (surrogate_key)
+values ([surrogate_key]);
+
+insert into identificador (surrogate_key, individuo_surrogate_key, designacao, area, emissor, data, tipo)
+values ([surrogate_key], [individuo_surrogate_key], [designacao], [area], [emissor], [data], [tipo]);
+
+insert into ctps (serie, estado, identificador_surrogate_key)
+values ([serie], [estado], [identificador_surrogate_key]);
+
+insert into certidao (tipo, cartorio, livro, folha, termo, identificador_surrogate_key)
+values ([tipo], [cartorio], [livro], [folha], [termo], [identificador_surrogate_key]);
+
+insert into titulo_eleitoral (secao, zona, identificador_surrogate_key)
+values ([secao], [zona], [identificador_surrogate_key]);
+
+insert into vinculo (relacionamento, data_inicio, data_fim, individuo_surrogate_key, identificador_surrogate_key)
+values ([relacionamento], [data_inicio], [data_fim], [individuo_surrogate_key], [identificador_surrogate_key]);
+
+insert into data (data, acuracia, surrogate_key)
+values ([data], [acuracia], [surrogate_key]);
+
+insert into dado_demografico (sexo, nome_da_mae, nome_do_pai, situacao_familiar, raca_cor, comentario, fonte_notificacao_obito, nascimento_pluralidade, nascimento_ordem, nascimento_seguimento, individuo_surrogate_key, data_nascimento_surrogate_key, data_obito_surrogate_key)
+values ([sexo], [nome_da_mae], [nome_do_pai], [situacao_familiar], [raca_cor], [comentario], [fonte_notificacao_obito], [nascimento_pluralidade], [nascimento_ordem], [nascimento_seguimento], [individuo_surrogate_key], [data_nascimento_surrogate_key], [data_obito_surrogate_key]);
+
+insert into endereco (data_inicio_surrogate_key, data_fim_surrogate_key, individuo_surrogate_key, surrogate_key,
+bairro, distrito, codigomunicipio, estado, cep, caixaposta, pais, tipo)
+values ([data_inicio_surrogate_key], [data_fim_surrogate_key], [individuo_surrogate_key], [surrogate_key],
+[bairro], [distrito], [codigomunicipio], [estado], [cep], [caixaposta], [pais], [tipo]);
+
+insert into linha_de_endereco (ordem, linha, endereco_surrogate_key)
+values ([ordem], [linha], [endereco_surrogate_key]);
+
+insert into nacionalidade (municipio, estado, pais, data_entrada_pais, dado_demografico_individuo_surrogate_key)
+values ([municipio], [estado], [pais], [data_entrada_pais], [dado_demografico_individuo_surrogate_key]);
+
+insert into titulo_eleitoral (secao, zona, identificador_surrogate_key)
+values ([secao], [zona], [identificador_surrogate_key]);
+
+insert into representacao (utilizacao, alternativa, nome_surrogate_key)
+values ([utilizacao], [alternativa], [nome_surrogate_key]);
+
+insert into comunicacao (meio, preferencia, detalhe, uso, individuo_surrogate_key)
+values ([meio], [preferencia], [detalhe], [uso], [individuo_surrogate_key]);
+
+Caso de uso 2: Nesse caso de uso, qualquer uma das tabelas pode ser atualizada dependendo de qual seja a necessidade de alteração de dados, então aqui darei um exemplo do que uma atualização seria, já que todas seguem o mesmo padrão.
+
+No caso de atualizar o endereço, supondo que a busca fosse com o número identificador do usuário, ela seria da seguinte forma:
+
+update endereco
+set bairro = [bairro]
+where individuo_surrogate_key = [individuo_surrogate_key]
+
+Caso de uso 3: Neste caso de uso, cada uma das opções ditas pelo professor serão usadas como exemplo de uma busca. São usados SELECTs para verificar se são encontrados registros com esses parâmetros.
+
+select * from nome
+where nomes = [nomes]
+
+select * from dado_demografico
+where nome_da_mae = [nome_da_mae]
+
+select * from data
+where [data] = [data]
+
+select * from dado_demografico
+where sexo = [sexo]
+
+Caso de uso 4:
+
+Neste caso de uso, tendo o identificador do usuário como base, qualquer uma das informações pode ser acessada. Portanto, uma das linhas vai ser utilizada para exemplificar isso.
+
+select * from identificador
+where individuo_surrogate_key = [individuo_surrogate_key]*
+
+select * from ctps
+where identificador_surrogate_key = [identificador_surrogate_key]
+
+Aqui, mostrei como do centro das informações, podemos ir até às margens das informações. Portanto, fica fácil de caminhar entre os dados.
